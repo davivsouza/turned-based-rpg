@@ -7,3 +7,15 @@
 body{
   background-color: black;
 }
+
+.header{
+  color: #fff;
+  font-family: Arial;
+  text-align: center;
+  margin-top: 20px;
+  line-height: 1.6;
+}
+
+.header p{
+  color: #ada9a9;
+}
