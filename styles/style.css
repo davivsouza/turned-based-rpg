@@ -1,14 +1,14 @@
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-body{
-  background-color: black;
+body {
+  background-color: #110f0f;
 }
 
-.header{
+.header {
   color: #fff;
   font-family: Arial;
   text-align: center;
@@ -16,6 +16,49 @@ body{
   line-height: 1.6;
 }
 
-.header p{
+.header p {
   color: #ada9a9;
+}
+
+#container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 2rem;
+  gap: 0.8rem;
+}
+
+.role {
+  width: 300px;
+  height: 300px;
+  cursor: pointer;
+}
+
+
+.role img {
+  width: 100%;
+  height: 100%;
+}
+.role.warrior {
+  border: 1px solid #ada9a9;
+}
+.role.mage {
+  border: 1px solid #7318a8;
+}
+.role.warrior h2,
+.role.mage h2 {
+  color: #fff;
+  font-family: Arial;
+  font-weight: bold;
+}
+
+.role p {
+  font-family: Arial;
+  color: #ada9a9;
+}
+footer {
+  color: #fff;
+  font-family: Arial;
+  text-align: center;
+  margin-top: 200px;
 }
