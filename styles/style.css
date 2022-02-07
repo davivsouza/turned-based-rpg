@@ -32,7 +32,10 @@ body {
   width: 300px;
   height: 300px;
   cursor: pointer;
+  
 }
+
+
 
 
 .role img {
@@ -42,9 +45,18 @@ body {
 .role.warrior {
   border: 1px solid #ada9a9;
 }
+
+
+
 .role.mage {
   border: 1px solid #7318a8;
 }
+
+.role.warrior:hover,
+.role.mage:hover {
+  border: 2px solid green;
+}
+
 .role.warrior h2,
 .role.mage h2 {
   color: #fff;
@@ -52,10 +64,14 @@ body {
   font-weight: bold;
 }
 
+
 .role p {
   font-family: Arial;
   color: #ada9a9;
+  line-height: 1.2;
 }
+
+
 footer {
   color: #fff;
   font-family: Arial;
