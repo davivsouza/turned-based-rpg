@@ -7,10 +7,19 @@
   <title>Turned-Based RPG | Battle</title>
 </head>
 <body>
-  <head>
-    <h2 class="tips">
-      Whoever has the most agility will start the first round
-    </h2>
-  </head>
+  <div id="battle-container">
+    <div class="hero">
+      <img src="../assets/mage.jpg" alt="mage">
+      
+      <div class="hero-details">
+        <p>Health</p>
+        <p>Strength</p>
+        <p>Mana</p>
+        <p>Agility</p>
+      </div>
+      <button class="findEnemy" onclick="gameManager.setBattle()">battle with monsters</button>
+
+    </div>
+  </div>
 </body>
 </html>

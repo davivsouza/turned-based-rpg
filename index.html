@@ -5,6 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./styles/style.css">
+  <link rel="stylesheet" href="./styles/battle.css">
   <script src="scripts/game.js"></script>
   <script src="scripts/player.js"></script>
   <script src="scripts/enemy.js"></script>
@@ -13,10 +14,10 @@
 <body>
   <header class="header">
     <h1>a simple Turned-based RPG</h1>
-    <p>choose a class and accept your fate!</p>
+    <p id="task">choose a class and accept your fate!</p>
   </header>
   <main id="container">
-    <section class="role warrior" title="Warrior">
+    <section class="role warrior" title="Warrior" data-class="warrior" onclick="gameManager.setGame(this)">
       <img src="./assets/warrior.jpg" alt="Warrior">
       <h2>Warrior</h2>
       <div class="details">
@@ -24,7 +25,7 @@
         
       </div>
     </section>
-    <section class="role mage" title="Mage">
+    <section class="role mage" title="Mage" data-class="mage" onclick="gameManager.setGame(this)">
       <img src="./assets/mage.jpg" alt="Mage">
       <h2>Mage</h2>
       <div class="details">
