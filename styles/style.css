@@ -76,5 +76,13 @@ footer {
   color: #fff;
   font-family: Arial;
   text-align: center;
-  margin-top: 200px;
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+
+footer a{
+  color: #b84444;
 }
