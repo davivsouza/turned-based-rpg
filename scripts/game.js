@@ -18,7 +18,20 @@ let gameManager = {
       default:
         break;
     }
-    enemy = new Enemy(2000, 2000, 2000, 2000)
+    let dragon = new Enemy("dragon", 2000, 2000, 2000, 2000);
+    let minotaur = new Enemy("minotaur", 120, 40, 0, 48);
+    let goblin = new Enemy("goblin", 108, 30, 0, 120);
+
+    let randomIndex = Math.floor(Math.random() * 2);
+
+    switch (randomIndex) {
+      case 0:
+        enemy = goblin;
+        break;
+      case 1:
+        enemy = minotaur;
+        break;
+    }
   },
   setInterface: function (heroClass, player) {
     let getContainer = document.querySelector("#container");
@@ -42,7 +55,7 @@ let gameManager = {
       </div>
       <p class="versus">
         VS
-        <button class="startBattle" onclick="gameManager.startBattle()">Start the battle!</button>
+        <button class="startBattle" onclick="gameManager.startBattle()">Attack!</button>
         
       </p>
       <div class="enemy"></div>
@@ -51,7 +64,6 @@ let gameManager = {
     `;
   },
   findBattle: function () {
-
     let getEnemyElement = document.querySelector(".enemy");
     let getTask = document.querySelector("#task");
     let getButton = (document.querySelector(".findEnemy").style.display =
@@ -60,8 +72,8 @@ let gameManager = {
 
     getTask.textContent = "Kill the enemy!";
     getEnemyElement.innerHTML = `
-    <img src="../assets/dragon.jpg" alt="Red Dragon">
-    <h2>Red Dragon</h2>
+    <img src="../assets/${enemy.name}.jpg" alt="${enemy.name}">
+    <h2>${enemy.name.toUpperCase()}</h2>
     
     <div class="enemy-details">
     <p>Health: ${enemy.health}</p>
@@ -71,71 +83,85 @@ let gameManager = {
     </div>
     `;
   },
-  startBattle: function(){
-    let getEnemyHealth = document.querySelector('.enemy-details p')
-    let getPlayerHealth = document.querySelector('.hero-details p')
+  startBattle: function () {
+    let getEnemyHealth = document.querySelector(".enemy-details p");
+    let getPlayerHealth = document.querySelector(".hero-details p");
+    let getTask = document.querySelector("#task");
 
-    if(player.agility >= enemy.agility){
-      let playerAttackDamage = player.calcAttack()
-      let playerTotalDamage = playerAttackDamage[0] * playerAttackDamage[1]
-      enemy.health -= playerTotalDamage
-       alert(`You did ${playerAttackDamage[1]} hits of ${playerAttackDamage[0] } damage`)
-      if(enemy.health<=0){
-        getEnemyHealth.textContent = `0`
-        alert('Congratulations! You won.')
-        location.reload()
+    if (player.agility >= enemy.agility) {
+      let playerAttackDamage = player.calcAttack();
+      let playerTotalDamage = playerAttackDamage[0] * playerAttackDamage[1];
+      enemy.health -= playerTotalDamage;
 
-      }else{
-        getEnemyHealth.textContent = `Health: ${Number(enemy.health).toFixed(0)}`
-        getPlayerHealth.textContent = `Health: ${Number(player.health).toFixed(0)}`
-        let enemyAttackDamage = enemy.calcAttack()
-        let enemyTotalDamage = enemyAttackDamage[0] * enemyAttackDamage[1]
-        player.health -= enemyTotalDamage
-        alert(`The enemy did ${enemyAttackDamage[1]} hits of ${enemyAttackDamage[0] } damage in you`)
+      getTask.innerHTML = ` <p> You did ${playerAttackDamage[1]} hits of ${playerAttackDamage[0]} damage </p> `;
+
+      if (enemy.health <= 0) {
+        getEnemyHealth.textContent = `0`;
+        alert("Congratulations! You won.");
+        location.reload();
+      } else {
+        getEnemyHealth.textContent = `Health: ${Number(enemy.health).toFixed(
+          0
+        )}`;
+        getPlayerHealth.textContent = `Health: ${Number(player.health).toFixed(
+          0
+        )}`;
+        let enemyAttackDamage = enemy.calcAttack();
+        let enemyTotalDamage = enemyAttackDamage[0] * enemyAttackDamage[1];
+        player.health -= enemyTotalDamage;
+        getTask.innerHTML += `<p>The enemy did ${enemyAttackDamage[1]} hits of ${enemyAttackDamage[0]} damage in you</p> `;
         
-        if(player.health <= 0){
-          getPlayerHealth.textContent = `0`
-          getEnemyHealth.textContent = `Health: ${Number(enemy.health).toFixed(0)}`
-          alert('You died! Good luck in the next time.')
-          location.reload()
 
-        }else{
-          getPlayerHealth.textContent = `Health: ${Number(player.health).toFixed(0)}`
+        if (player.health <= 0) {
+          getPlayerHealth.textContent = `0`;
+          getEnemyHealth.textContent = `Health: ${Number(enemy.health).toFixed(
+            0
+          )}`;
+          alert("You died! Good luck in the next time.");
+          location.reload();
+        } else {
+          getPlayerHealth.textContent = `Health: ${Number(
+            player.health
+          ).toFixed(0)}`;
         }
       }
-      
-    
-    }else{
-      let enemyAttackDamage = enemy.calcAttack()
-      let enemyTotalDamage = enemyAttackDamage[0] * enemyAttackDamage[1]
-      player.health -= enemyTotalDamage
-      alert(`The enemy did ${enemyAttackDamage[1]} hits of ${enemyAttackDamage[0] } damage in you`)
-      
-      if(player.health <= 0){
-        getPlayerHealth.textContent = `0`
-        getEnemyHealth.textContent = `Health: ${Number(enemy.health).toFixed(0)}`
-        alert('You died! Good luck in the next time.')
-        location.reload()
+    } else {
+      let enemyAttackDamage = enemy.calcAttack();
+      let enemyTotalDamage = enemyAttackDamage[0] * enemyAttackDamage[1];
+      player.health -= enemyTotalDamage;
+      getTask.innerHTML = `<p>The enemy did ${enemyAttackDamage[1]} hits of ${enemyAttackDamage[0]} damage in you</p> `;
 
-      }else{
-        let playerAttackDamage = player.calcAttack()
-        let playerTotalDamage = playerAttackDamage[0] * playerAttackDamage[1]
-        enemy.health -= playerTotalDamage
-        alert(`You did ${playerAttackDamage[1]} hits of ${playerAttackDamage[0] } damage`)
-        if(enemy.health<=0){
-          getEnemyHealth.textContent = `0`
-          getPlayerHealth.textContent = `Health: ${Number(player.health).toFixed(0)}`
-  
-          alert('Congratulations! You won.')
-          location.reload()
-  
-  
-        }else{
-         getEnemyHealth.textContent = `Health: ${Number(enemy.health).toFixed(0)}`
+
+      if (player.health <= 0) {
+        getPlayerHealth.textContent = `0`;
+        getEnemyHealth.textContent = `Health: ${Number(enemy.health).toFixed(
+          0
+        )}`;
+        alert("You died! Good luck in the next time.");
+        location.reload();
+      } else {
+        getPlayerHealth.textContent = `Health: ${Number(player.health).toFixed(
+          0
+        )}`;
+        let playerAttackDamage = player.calcAttack();
+        let playerTotalDamage = playerAttackDamage[0] * playerAttackDamage[1];
+        enemy.health -= playerTotalDamage;
+        getTask.innerHTML += `<p>You did ${playerAttackDamage[1]} hits of ${playerAttackDamage[0]} damage</p>`;
+
+        if (enemy.health <= 0) {
+          getEnemyHealth.textContent = `0`;
+          getPlayerHealth.textContent = `Health: ${Number(
+            player.health
+          ).toFixed(0)}`;
+
+          alert("Congratulations! You won.");
+          location.reload();
+        } else {
+          getEnemyHealth.textContent = `Health: ${Number(enemy.health).toFixed(
+            0
+          )}`;
         }
       }
-
-      
     }
-  }
+  },
 };

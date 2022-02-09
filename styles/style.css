@@ -16,10 +16,11 @@ body {
   line-height: 1.6;
 }
 
-.header p {
-  color: #ada9a9;
-}
 
+#task{
+  color: #fff;
+  font-size: 1.2rem;
+}
 #container {
   display: flex;
   align-items: center;

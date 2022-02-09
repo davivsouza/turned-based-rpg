@@ -1,6 +1,7 @@
 let enemy;
 
-function Enemy(health, strength, mana, agility) {
+function Enemy(name,health, strength, mana, agility) {
+  this.name = name
   this.health = health;
   this.strength = strength;
   this.mana = mana;
